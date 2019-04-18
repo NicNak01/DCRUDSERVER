@@ -1,21 +1,18 @@
-
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
 const carnumbersRoutes = require("./api/routes/carnumbers");
 
-mongoose.connect('mongodb+srv://CarPlatte:CarPlatte@cluster0-veobt.mongodb.net/test?retryWrites=true',
-// mongoose.connect('mongodb://Solo:Soloma01!@cluster0-shard-00-00-hhnga.mongodb.net:27017,cluster0-shard-00-01-hhnga.mongodb.net:27017,cluster0-shard-00-02-hhnga.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
-{
-    useNewUrlParser: true 
-});
-
-
+mongoose.connect(
+  "mongodb+srv://CarPlatte:CarPlatte@cluster0-veobt.mongodb.net/test?retryWrites=true",
+  {
+    useNewUrlParser: true
+  }
+);
 app.use(morgan("dev"));
-app.use('/uploads', express.static('uploads'));
+// app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -31,8 +28,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-// Routes which should handle requests
 
 app.use("/carnumbers", carnumbersRoutes);
 
